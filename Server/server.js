@@ -1,15 +1,15 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
+require('dotenv').config();
+const router = require('./routes.js');
+const PORT = process.env.PORT || 3000
+const {startDb} = require('./db.js')
 
-app.get('/',(req,res)=>{
-    res.send('Server deployed')
-})
+app.use(router);
 
-
-app.listen(3000, ()=>{
- console.log('success')
-})
-
+app.listen(PORT, () => {
+    startDb()
+  console.log('Server is running...');
+});
 
 module.exports = app;
-
