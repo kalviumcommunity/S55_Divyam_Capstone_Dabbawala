@@ -7,6 +7,9 @@ const dabbas = require('./dabba.js')
 const {MealModel} = require('./schema.js')
 router.use(express.json());
 
+const cors = require('cors')
+router.use(cors())
+
 router.get('/',(req,res)=>{
     res.send('Server deployed')
 })
