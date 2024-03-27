@@ -17,6 +17,8 @@ function Home() {
         setDabbas(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
+        // corrected code after review
+        alert('error fetching data:', error)
       }
     };
 
@@ -61,9 +63,9 @@ function Home() {
         <div className='choose_dabba'>
           {dabbas.map((dabba) => (
             <div className='dabba' key={dabba._id}>
-              {/* <div> */}
+             
               <img src={dabba.Img} alt={dabba.Name} id='img'/>
-              {/* </div> */}
+            
             
               <p>{dabba.Name}</p>
               <p>Price: {dabba.Price}</p>
