@@ -3,7 +3,8 @@ const router = express.Router()
 require('dotenv').config()
 const mongoose = require('mongoose')
 const {getConnectionStatus} = require('./db.js')
-
+const dabbas = require('./dabba.js')
+const {MealModel} = require('./schema.js')
 router.use(express.json());
 
 router.get('/',(req,res)=>{
@@ -16,8 +17,15 @@ router.get('/db',async (req,res)=>{
     res.send(status)
 })
 
-router.get('/dabba',(req,res)=>{
-
+router.get('/dabba',async(req,res)=>{
+    try{
+        const meals = await MealModel.find({})
+        console.log(meals)
+        res.status(200).send(meals)
+    }catch(err){
+        res.status(401).send('error fetching data',err)
+    }
+   
 })
 
 
