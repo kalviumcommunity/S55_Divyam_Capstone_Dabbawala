@@ -4,8 +4,10 @@ require('dotenv').config();
 const router = require('./routes.js');
 const PORT = process.env.PORT || 3000
 const {startDb} = require('./db.js')
+const cors = require('cors')
 
 app.use(router);
+app.use(cors())
 
 app.listen(PORT, () => {
     startDb()
