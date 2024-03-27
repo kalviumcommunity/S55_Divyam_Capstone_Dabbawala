@@ -65,8 +65,16 @@ nav {
   margin-right: 2vw;
 }
 
+#count{
+  text-decoration: none;
+  color: white;
+  font-size: 1.6vw;
+  margin-top: -4vw;
+  margin-left: 1.3vw;
+}
+
 .categories {
-  height: 77vw;
+  height: 83vw;
   background-color: #264653;
   color: #fff;
   margin-top: -2vw;
@@ -101,19 +109,22 @@ nav {
 
 .fav {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  overflow-x: scroll;
+ scrollbar-width: none;
 }
 .choose_dabba{
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  overflow-x: scroll;
+  scrollbar-width: none;
 }
 
 .locations{
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  overflow-x: scroll;
+  scrollbar-width: none;
 }
 
 
@@ -137,19 +148,42 @@ nav {
 
 .dabba{
   flex: 0 0 auto;
-  width: calc(20% - 10px);
-  height: 300px;
+  width: calc(25% - 10px);
+  height: 360px;
   margin-left:20px ;
   margin-right: 20px;
   margin-bottom: 10px;
   background-color: #f2f2f2;
   border-radius: 5px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  /* font-size: 20px; */
   margin-top: 3vw;
   color: black;
+  text-align: center;
+}
+
+#img{
+   width: 80%;
+  height: 10vw;
+}
+
+.items{
+  font-size: 13px;
+  line-height: 1px;
+  text-align: center;
+  margin-left: 2.4vw;
+  width: 80%;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
+
+}
+.itemm{
+  width: 80%;
 }
 
 .location{
@@ -167,6 +201,11 @@ nav {
   font-size: 20px;
   margin-top: 3vw;
   color: black;
+}
+
+.items{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .show-more-btn,
