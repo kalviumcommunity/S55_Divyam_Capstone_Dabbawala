@@ -47,10 +47,9 @@ router.get('/item',async(req,res)=>{
         console.log(items)
         res.status(200).send(items)
     }catch(err){
-        // res.status(401).send('error fetching locations',err)
-        console.log(err)
-    }
-})
+        res.status(500).send('error fetching locations',err)
+}})
+
 
 
 module.exports = router
