@@ -4,7 +4,7 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const {getConnectionStatus} = require('./db.js')
 const dabbas = require('./dabba.js')
-const {MealModel} = require('./schema.js')
+const {MealModel,locationModel,itemModel} = require('./schema.js')
 router.use(express.json());
 
 const cors = require('cors')
@@ -29,6 +29,27 @@ router.get('/dabba',async(req,res)=>{
         res.status(401).send('error fetching data',err)
     }
    
+})
+
+router.get('/location',async(req,res)=>{
+    try{
+        const locations = await locationModel.find({})
+        console.log(locations)
+        res.status(200).send(locations)
+    }catch(err){
+        res.status(401).send('error fetching locations',err)
+    }
+})
+
+router.get('/item',async(req,res)=>{
+    try{
+        const items = await itemModel.find({})
+        console.log(items)
+        res.status(200).send(items)
+    }catch(err){
+        // res.status(401).send('error fetching locations',err)
+        console.log(err)
+    }
 })
 
 
