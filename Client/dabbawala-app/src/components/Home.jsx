@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 import axios from 'axios';
+import { useNavigate,Link } from 'react-router-dom';
 
 function Home() {
-  const [visibleMeals, setVisibleMeals] = useState(10);
-  const [dabbas, setDabbas] = useState([]);
-  const [visibleLocations, setVisibleLocations] = useState(10);
 
-  const meals = Array.from({ length: 10 }, (_, i) => `Meal ${i + 1}`);
-  const locations = Array.from({ length: 4 }, (_, i) => `Location ${i + 1}`);
+  const [items,setItems]= useState([])
+  const [dabbas, setDabbas] = useState([]);
+  const [locations,setLocations]= useState([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,7 +18,7 @@ function Home() {
         setDabbas(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
-        // corrected code after review
+        
         alert('error fetching data:', error)
       }
     };
@@ -25,14 +26,42 @@ function Home() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://s55-divyam-capstone-dabbawala.onrender.com/item');
+        setItems(response.data);
+      } catch (error) {
+        console.error('Error fetching items', error);
+        alert('error fetching items', error)
+      }
+    };
+    fetchData();
+  }, []);
+
+
+  useEffect(()=>{
+    const fetchData = async()=>{
+      try{
+        const response = await axios.get('https://s55-divyam-capstone-dabbawala.onrender.com/location');
+        setLocations(response.data);
+      }catch(error){
+        console.error('Error fetching items', error);
+        alert('error fetching items', error)
+      }
+    };
+    fetchData();
+  },[]);
+
+
   return (
     <>
       <nav>
         <div className='nav-cont'>
           <img src="https://img.hotimg.com/dabbawala-logo.png" alt="logo" id='logo' />
           <input type="text" placeholder='  Search...' id='search' />
-          <a href=""><img src="https://img.hotimg.com/sign-up.png" alt="Signup" className='usercred' /></a>
-          <a href=""><img src="https://img.hotimg.com/login718385d45bd21300.png" className='usercred' alt="login" /></a>
+          <a href=""><Link to='/signup'><img src="https://img.hotimg.com/sign-up.png" alt="Signup" className='usercred' /></Link></a>
+          <a href=""><Link to='/login'><img src="https://img.hotimg.com/login718385d45bd21300.png" className='usercred' alt="login" /></Link></a>
           <a href=""><img src="https://img.hotimg.com/shopping-cart-1.png" alt="cart" id='cart' /></a>
         </div>
       </nav>
@@ -53,9 +82,15 @@ function Home() {
         <div className='menu'>
           <h2 id='cat-1'>Popular categories</h2>
           <div className='fav'>
-            {meals.slice(0, visibleMeals).map((meal, index) => (
+            {/* {meals.slice(0, visibleMeals).map((meal, index) => (
               <div className="meal" key={index}>{meal}</div>
-            ))}
+            ))} */}
+            {items.map((item)=>(
+                <div className='meal' key={item._id}>
+                      <img src={item.img} alt="item" width='40px' />
+                </div>
+            ))
+            }
           </div>
         </div>
 
@@ -85,9 +120,13 @@ function Home() {
 
         <h2 id='cat-3'>Nearby locations</h2>
         <div className='locations'>
-          {locations.slice(0, visibleLocations).map((location, index) => (
-            <div className='location' key={index}>{location}</div>
-          ))}
+          {locations.map((location)=>(
+            <div className='location' key={location._id}>
+                <img src={location.img} alt="location"  id='location-img'/>
+            </div>
+          ))
+
+          }
         </div>
       </div>
 
