@@ -18,7 +18,12 @@ const itemSchema = mongoose.Schema({
     img : String
 })
 
+const userSchema = mongoose.Schema({
+    username : String,
+    password : String
+})
 const MealModel =  mongoose.model('dabbawalacollection',mealSchema)
 const locationModel = mongoose.model('location',locationSchema)
 const itemModel = mongoose.model('meal',itemSchema)
-module.exports =  {MealModel,locationModel,itemModel}
+const userModel = mongoose.model('user',userSchema)
+module.exports =  {MealModel,locationModel,itemModel,userModel}

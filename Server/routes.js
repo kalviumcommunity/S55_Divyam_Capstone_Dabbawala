@@ -4,7 +4,7 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const {getConnectionStatus} = require('./db.js')
 const dabbas = require('./dabba.js')
-const {MealModel,locationModel,itemModel} = require('./schema.js')
+const {MealModel,locationModel,itemModel,userModel} = require('./schema.js')
 router.use(express.json());
 
 const cors = require('cors')
@@ -49,6 +49,44 @@ router.get('/item',async(req,res)=>{
     }catch(err){
         res.status(500).send('error fetching locations',err)
 }})
+
+router.post('/signup', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        // Check if the username already exists
+        const existingUser = await userModel.findOne({ username });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Username already exists' });
+        }
+
+        // Create a new user if the username doesn't exist
+        const newUser = await userModel.create({
+            username: username,
+            password: password
+        });
+
+        res.status(200).json(newUser);
+    } catch (error) {
+        res.status(500).send('Internal server error');
+        console.log('error:', error);
+    }
+});
+
+router.post('/login',async(req,res)=>{
+    try{
+        const {username,password} = req.body;
+        const user = await userModel.findOne({username,password})
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+        res.status(200).json({user})
+    }catch(error){
+        res.status(500).send('Internal server error')
+        console.log('error',error)
+    }
+       
+})
 
 
 
