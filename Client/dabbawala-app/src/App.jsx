@@ -2,6 +2,7 @@ import './App.css'
 import Home from './components/Home'
 import Signup from './components/Signup'
 import Login from './components/Login'
+import Location from './components/Location'
 import {Routes,Route } from 'react-router-dom'
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
       <Route path='/' element = {<Home/>} />
       <Route path='/signup' element = {<Signup/>} />
       <Route path='/login' element = {<Login/>} />
+      <Route path = '/location/:id' element = {<Location/>}/>
     </Routes>
      
     </>

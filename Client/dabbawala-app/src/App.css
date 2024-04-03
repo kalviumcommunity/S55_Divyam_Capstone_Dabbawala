@@ -140,6 +140,9 @@ nav {
   overflow-x: scroll;
   scrollbar-width: none;
 }
+.locations:hover{
+  cursor: pointer;
+}
 
 
 
@@ -328,6 +331,67 @@ footer{
 
 #login{
   margin-right: 2vw;
+}
+
+.location-grid{
+  display: grid;
+  grid-template-columns: 2fr 1fr; 
+}
+
+#loc-img{
+  width: 100%;
+  height:100vh;
+}
+
+.loc-page{
+  text-align: center;
+  /* background-color: #208AAE; */
+  background-image: url('https://img.hotimg.com/Brand-pattern-for-sustainable-nutrition-business_.jpeg');
+  color: rgb(0, 0, 0);
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+}
+
+#title{
+  margin-top: 3vw;
+  font-weight: 500;
+  
+}
+
+#back-btn{
+  margin-top: 2vw;
+  width: 8vw;
+  height: 2vw;
+  font-weight: 600;
+  background-color: #b43b3b39;
+  color: white;
+
+}
+#back-btn:hover{
+    cursor: pointer;
+}
+
+#loc-info{
+  width: 340px;
+  margin-left: 5vw;
+  font-size: 16px;
+  
+}
+
+#head-img{
+  height: 8vw;
+  margin-top: 1vw;
+}
+
+.loc-cont{
+  background-color: #b43b3bd8;
+  width: 30vw;
+  margin-left: 2vw;
+  margin-top: 1vw;
+  height: 95vh;
+  border-radius: 20px;
+  color: white;
 }
 
 /* Responsive adjustments */
