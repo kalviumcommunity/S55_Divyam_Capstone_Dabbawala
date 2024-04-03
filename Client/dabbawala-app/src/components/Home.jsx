@@ -60,6 +60,12 @@ function Home() {
   };
 
 
+  const handleLocationClick = (id) =>{
+    sessionStorage.setItem('selectedLocation', id)
+    navigate(`/location/${id}`)
+  }
+
+
   return (
     <>
       <nav>
@@ -147,13 +153,12 @@ function Home() {
 
         <h2 id='cat-3'>Nearby locations</h2>
         <div className='locations'>
-          {locations.map((location)=>(
-            <div className='location' key={location._id}>
-                <img src={location.img} alt="location"  id='location-img'/>
-            </div>
-          ))
+        {locations.map((location)=>(
+       <div className='location' key={location._id} onClick={() => handleLocationClick(location._id)}>
+            <img src={location.img} alt="location"  id='location-img'/>
+      </div>
+))}
 
-          }
         </div>
       </div>
 
