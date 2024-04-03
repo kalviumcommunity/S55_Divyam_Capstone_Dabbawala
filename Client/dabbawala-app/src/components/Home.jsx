@@ -9,6 +9,7 @@ function Home() {
   const [dabbas, setDabbas] = useState([]);
   const [locations,setLocations]= useState([]);
   const navigate = useNavigate();
+  const loginInfo = sessionStorage.getItem('login')
 
 
   useEffect(() => {
@@ -53,16 +54,36 @@ function Home() {
     fetchData();
   },[]);
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('login');
+    navigate('/');
+  };
+
 
   return (
     <>
       <nav>
         <div className='nav-cont'>
-          <img src="https://img.hotimg.com/dabbawala-logo.png" alt="logo" id='logo' />
-          <input type="text" placeholder='  Search...' id='search' />
-          <a href=""><Link to='/signup'><img src="https://img.hotimg.com/sign-up.png" alt="Signup" className='usercred' /></Link></a>
-          <a href=""><Link to='/login'><img src="https://img.hotimg.com/login718385d45bd21300.png" className='usercred' alt="login" /></Link></a>
-          <a href=""><img src="https://img.hotimg.com/shopping-cart-1.png" alt="cart" id='cart' /></a>
+          <img src='https://img.hotimg.com/Designer__2_-removebg-preview.png' alt='logo' id='logo' />
+          <input type='text' placeholder='  Search...' id='search' />
+          {loginInfo === 'true' ? (
+            <>
+              
+              <Link to='/cart'>
+                <img src='https://img.hotimg.com/shopping-cart-1.png' alt='cart' id='cart' />
+              </Link>
+              <Link onClick={handleLogout}><img src="https://img.hotimg.com/logout.png" alt="" id='logout'/></Link>
+            </>
+          ) : (
+            <>
+              <Link to='/signup'>
+                <img src='https://img.hotimg.com/sign-up.png' alt='Signup' className='usercred' />
+              </Link>
+              <Link to='/login'>
+                <img src='https://img.hotimg.com/login718385d45bd21300.png' className='usercred' alt='login'id='login' />
+              </Link>
+            </>
+          )}
         </div>
       </nav>
       <div className='about'>

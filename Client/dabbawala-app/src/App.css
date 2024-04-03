@@ -23,8 +23,7 @@ nav {
 
 #logo {
   width: 8vw;
-  margin-top: 1vw;
-  height: 4vw;
+  height: 6vw;
   margin-left: 2vw;
 }
 
@@ -319,6 +318,16 @@ footer{
 #heading{
   margin-top: -2vw;
   font-weight: 500;
+}
+
+#logout{
+   height: 2.3vw;
+   margin-top: 2vw;
+   margin-right: 4vw;
+}
+
+#login{
+  margin-right: 2vw;
 }
 
 /* Responsive adjustments */
