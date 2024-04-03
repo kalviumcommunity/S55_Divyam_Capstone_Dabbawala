@@ -132,8 +132,14 @@ function Home() {
                    <i><p>{item},</p></i>
                 ))}
             </div>
-               
-            
+            <br />
+            {loginInfo === 'true'?(
+                 <button>Add to cart</button>
+            ):(
+              <p></p> 
+            )
+          }
+           
               
             </div>
           ))}
