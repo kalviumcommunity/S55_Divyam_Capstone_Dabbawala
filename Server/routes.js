@@ -41,6 +41,22 @@ router.get('/location',async(req,res)=>{
     }
 })
 
+
+
+router.get('/location/:id', async (req, res) => {
+    try {
+      const locationId = req.params.id;
+      const location = await locationModel.findById(locationId);
+      if (!location) {
+        return res.status(404).send('Location not found');
+      }
+      res.status(200).send(location);
+    } catch (err) {
+      res.status(500).send('Internal server error');
+      console.error('Error:', err);
+    }
+  });
+
 router.get('/item',async(req,res)=>{
     try{
         const items = await itemModel.find({})
