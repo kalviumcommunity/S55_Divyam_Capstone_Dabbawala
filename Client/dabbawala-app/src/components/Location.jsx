@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
 
+
+
 function Location() {
   const [locationData, setLocationData] = useState({});
   const { id } = useParams();
@@ -24,11 +26,7 @@ function Location() {
 
   return (
     <div className='location-grid'>
-      {/* <h2>Location Details</h2>
-      <p>ID: {locationData._id}</p>
-      <p>Name: {locationData.name}</p>
-      */}
-    <img src={locationData.img} alt=""  id='loc-img'/>
+    <img src={locationData.img} alt=""  className='loc-img'/>
       <div className='loc-page'>
         <div className='loc-cont'>
         <img src="https://img.hotimg.com/Designer__1_-removebg-preview-1.png" alt="" id='head-img'/>
