@@ -61,7 +61,7 @@ nav {
 #cart {
   height: 3vw;
   margin-top: 1.8vw;
-  margin-right: 2vw;
+  margin-left: 8vw;
 }
 
 #count{
@@ -390,7 +390,122 @@ footer{
   border-radius: 20px;
   color: white;
 }
+/* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
+.content-loader {
+  width: 50px;
+  margin-left: 45.5vw;
+  margin-top: -6vw;
 
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid #0000;
+  border-radius: 50%;
+  border-right-color: #000000;
+  animation: l15 1s infinite linear;
+}
+.content-loader::before,
+.content-loader::after {    
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+  animation: l15 2s infinite;
+}
+.content-loader::after {
+  margin: 8px;
+  animation-duration: 3s;
+}
+@keyframes l15{ 
+  100%{transform: rotate(1turn)}
+}
+
+.loader-cont{
+  padding-bottom: 2.2vw;
+}
+
+.cart-nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between ;
+}
+
+#home{
+  height: 3vw;
+  margin-top: 1.6vw;
+  margin-left: 36vw;
+}
+
+.checkout{
+  background-color: #2A9D8F;
+  height: 100vh;
+  text-align: center;
+}
+
+.sections{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  text-align: center;
+  font-weight: 500;
+}
+#line {
+  width: 100%;
+  height: 2px;
+  background-color: black;
+}
+.food{
+    width: 12vw;
+    height: 12vw; 
+    border-radius: 10px;
+}
+
+
+.dish-cont{
+  height: 20vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#line2{
+  height: 2px;
+  width: 100%;
+  background-color: rgba(178, 178, 178, 0.667);
+  margin-top: 3vw;
+}
+.order{
+  width: 20vw;
+  margin-left: 6vw;
+  margin-top: 4vw;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2vw;
+}
+.total{
+  display: flex;
+  justify-content: space-between;
+}
+
+#line3{
+  width: 100%;
+  height: 1px;
+  background-color: black;
+}
+
+#checkout-btn{
+  background-color: #2A9D8F;
+  height: 3vw;
+  width: 8vw;
+  margin-left: 7vw;
+  font-weight: 600;
+}
+
+#checkout-btn:hover{
+  cursor: pointer;
+}
 
 @media screen and (max-width: 768px) {
   .meal {
