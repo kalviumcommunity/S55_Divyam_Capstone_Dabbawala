@@ -171,7 +171,7 @@ function Home() {
         ):(
           <>
           <div className='loader-cont'>
-          <div class="loader"></div>
+          <div class="content-loader"></div>
           </div>
          
           </>

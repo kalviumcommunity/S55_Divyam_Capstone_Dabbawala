@@ -393,7 +393,7 @@ footer{
 /* HTML: <div class="loader"></div> */
 /* HTML: <div class="loader"></div> */
 /* HTML: <div class="loader"></div> */
-.loader {
+.content-loader {
   width: 50px;
   margin-left: 45.5vw;
   margin-top: -6vw;
@@ -405,8 +405,8 @@ footer{
   border-right-color: #000000;
   animation: l15 1s infinite linear;
 }
-.loader::before,
-.loader::after {    
+.content-loader::before,
+.content-loader::after {    
   content: "";
   grid-area: 1/1;
   margin: 2px;
@@ -414,7 +414,7 @@ footer{
   border-radius: 50%;
   animation: l15 2s infinite;
 }
-.loader::after {
+.content-loader::after {
   margin: 8px;
   animation-duration: 3s;
 }
