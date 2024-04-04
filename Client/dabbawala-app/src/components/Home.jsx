@@ -10,6 +10,9 @@ function Home() {
   const [locations,setLocations]= useState([]);
   const navigate = useNavigate();
   const loginInfo = sessionStorage.getItem('login')
+  const [dabbaStatus,setDabbaStatus] = useState(false);
+  const [itemStatus,setItemStatus] = useState(false);
+  const [locationStatus,setLocationStatus] = useState(false);
 
 
   useEffect(() => {
@@ -17,10 +20,11 @@ function Home() {
       try {
         const response = await axios.get('https://s55-divyam-capstone-dabbawala.onrender.com/dabba');
         setDabbas(response.data);
+        setDabbaStatus(true)
       } catch (error) {
         console.error('Error fetching data:', error);
         
-        alert('error fetching data:', error)
+        // alert('error fetching data:', error)
       }
     };
 
@@ -32,9 +36,10 @@ function Home() {
       try {
         const response = await axios.get('https://s55-divyam-capstone-dabbawala.onrender.com/item');
         setItems(response.data);
+        setItemStatus(true)
       } catch (error) {
         console.error('Error fetching items', error);
-        alert('error fetching items', error)
+        // alert('error fetching items', error)
       }
     };
     fetchData();
@@ -46,9 +51,10 @@ function Home() {
       try{
         const response = await axios.get('https://s55-divyam-capstone-dabbawala.onrender.com/location');
         setLocations(response.data);
+        setLocationStatus(true)
       }catch(error){
         console.error('Error fetching items', error);
-        alert('error fetching items', error)
+        // alert('error fetching items', error)
       }
     };
     fetchData();
@@ -105,13 +111,13 @@ function Home() {
         </div>
         <img src="https://img.hotimg.com/Indian_Illustration-removebg-preview.png" alt="dabbawala" id='dabbawala' />
       </div>
-      <div className='categories'>
+      
+        {dabbaStatus === true && locationStatus === true && itemStatus === true ?(
+          <>
+            <div className='categories'>
         <div className='menu'>
           <h2 id='cat-1'>Popular categories</h2>
           <div className='fav'>
-            {/* {meals.slice(0, visibleMeals).map((meal, index) => (
-              <div className="meal" key={index}>{meal}</div>
-            ))} */}
             {items.map((item)=>(
                 <div className='meal' key={item._id}>
                       <img src={item.img} alt="item" width='40px' />
@@ -160,7 +166,19 @@ function Home() {
 ))}
 
         </div>
-      </div>
+            </div>
+          </>
+        ):(
+          <>
+          <div className='loader-cont'>
+          <div class="loader"></div>
+          </div>
+         
+          </>
+        )
+
+        }
+      
 
       <footer>
         &copy;2024 Dabbawala.Inc
