@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-//  const navigate = useNavigate();
+ 
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
 function Cart() {
@@ -8,6 +8,12 @@ function Cart() {
   //     sessionStorage.removeItem('login');
   //     {<Navigate to='/'></Navigate>}
   //   };
+  const navigate = useNavigate();
+
+  const logout = ()=>{
+    sessionStorage.removeItem('login')
+    navigate('/')
+  }
 
   return (
     <>
@@ -22,7 +28,10 @@ function Cart() {
           <Link to="/">
             <img src="https://img.hotimg.com/home-2.png" alt="" id="home" />
           </Link>
+          <Link onClick={logout} to='/'>
           <img src="https://img.hotimg.com/logout.png" alt="" id="logout" />
+          </Link>
+        
         </div>
       </nav>
       <div className="grid">
@@ -106,7 +115,7 @@ function Cart() {
               <p>₹550</p>
             </div>
             
-              <button id="checkout-btn">Checkout</button>
+              <button id="checkout-btn"><Link to='/pay'>Checkout</Link></button>
         
           </div>
         </div>
