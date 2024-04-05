@@ -4,10 +4,6 @@ import "../App.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
 function Cart() {
-  // const handleLogout = () => {
-  //     sessionStorage.removeItem('login');
-  //     {<Navigate to='/'></Navigate>}
-  //   };
   const navigate = useNavigate();
 
   const logout = ()=>{
@@ -115,7 +111,7 @@ function Cart() {
               <p>₹550</p>
             </div>
             
-              <button id="checkout-btn"><Link to='/pay'>Checkout</Link></button>
+              <button id="checkout-btn"><Link to='/checkout/payment'>Checkout</Link></button>
         
           </div>
         </div>
