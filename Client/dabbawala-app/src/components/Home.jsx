@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import "../App.css";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+
 
 function Home() {
   const [items, setItems] = useState([]);
@@ -12,6 +13,7 @@ function Home() {
   const [dabbaStatus, setDabbaStatus] = useState(false);
   const [itemStatus, setItemStatus] = useState(false);
   const [locationStatus, setLocationStatus] = useState(false);
+  const categoriesRef = useRef(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,6 +75,10 @@ function Home() {
     navigate(`/location/${id}`);
   };
 
+
+  const scrollToCategories = () => {
+    categoriesRef.current.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <>
       <nav>
@@ -133,6 +139,11 @@ function Home() {
             <p className="lines">we bring wholesome meals to your doorstep, </p>
             <p className="lines">ensuring every bite is a taste of home.</p>
           </i>
+          <br />
+          <div className="zip-wrapper">
+              <input type="text" id="zip" placeholder="Enter your PIN code" />
+              <button aria-label="Find Dabbas by ZIP code">Find Dabbas</button>
+          </div>
         </div>
         <img
           src="https://img.hotimg.com/Indian_Illustration-removebg-preview.png"
@@ -145,7 +156,7 @@ function Home() {
       locationStatus === true &&
       itemStatus === true ? (
         <>
-          <div className="categories">
+          <div className="categories" ref={categoriesRef}>
             <div className="menu">
               <h2 id="cat-1">Popular categories</h2>
               <div className="fav">
@@ -207,6 +218,26 @@ function Home() {
         </>
       )}
 
+      <div className="translucent">
+        
+      </div>
+      <div className="options">
+        <div className="op-cont">
+          <p>Since 2024</p>
+         <h2 id="slogan">Fueling local dreams, One Delicious dish at a time</h2>
+            <div className="buut">
+              <Link to= '/dabbawala'>
+              <button className="op-but">Become a dabbawala</button>
+              </Link>
+            
+              <button className="op-but" onClick={scrollToCategories}>Order Food</button>
+            </div>
+         
+
+        </div>
+
+      </div>
+
       <footer>
        
         <div className="footer-cont">
@@ -231,7 +262,7 @@ function Home() {
             <img src="https://img.hotimg.com/twitter.png" alt=""   className="social"/>
             <img src="https://img.hotimg.com/facebookdae9744a48f4d9f5.png" alt=""  className="social" />
           </div>
-        </div>
+        </div>  
 
         </div>
         <div className="copyright">

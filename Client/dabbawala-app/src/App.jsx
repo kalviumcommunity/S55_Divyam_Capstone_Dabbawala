@@ -6,6 +6,7 @@ import Location from './components/Location'
 import Cart from './components/Cart'
 import Payment from './components/Payment'
 import {Routes,Route } from 'react-router-dom'
+import Dabbwala from './components/Dabbwala'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Route path='/cart'  element={<Cart/>}/>
       <Route path='/checkout/payment' element={<Payment/>}/>
       <Route path = '/location/:id' element = {<Location/>}/>
+      <Route path='/dabbawala' element = {<Dabbwala/>}/>
     </Routes>
      
     </>
