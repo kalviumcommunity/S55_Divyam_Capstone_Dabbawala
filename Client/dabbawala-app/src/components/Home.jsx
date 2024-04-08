@@ -142,7 +142,7 @@ function Home() {
           <br />
           <div className="zip-wrapper">
               <input type="text" id="zip" placeholder="Enter your PIN code" />
-              <button>Find Dabbas</button>
+              <button aria-label="Find Dabbas by ZIP code">Find Dabbas</button>
           </div>
         </div>
         <img

@@ -620,7 +620,7 @@ nav {
   position: absolute;
   width: 40vw;
   height: 20vw;
-  background-color: #fffffff5;
+  background-color: #ffffff26;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -645,7 +645,7 @@ nav {
   height: 2.5vw;
   font-size: 1vw;
   cursor: pointer;
-  background-color:#fffffff5 ;
+  background-color:#ffffff26 ;
 }
 
 .op-but:hover{
