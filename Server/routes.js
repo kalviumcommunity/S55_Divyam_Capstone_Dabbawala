@@ -4,7 +4,7 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const {getConnectionStatus} = require('./db.js')
 const dabbas = require('./dabba.js')
-const {MealModel,locationModel,itemModel,userModel} = require('./schema.js')
+const {MealModel,locationModel,itemModel,userModel,providerModel} = require('./schema.js')
 router.use(express.json());
 
 const cors = require('cors')
@@ -103,7 +103,48 @@ router.post('/login',async(req,res)=>{
     }
        
 })
+router.post('/provsign' ,async(req, res) => {
+    try {
+        const { firstname,lastname,email,password,pin,phone } = req.body;
 
+       
+        const existingUser = await providerModel.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ error: 'User already exists' });
+        }
+
+        
+        const newUser = await providerModel.create({
+            firstname: firstname,
+            lastname: lastname,
+            email : email,
+            password : password,
+            pin : pin,
+            phone :phone
+        });
+
+        res.status(200).json(newUser);
+    } catch (error) {
+        res.status(500).send('Internal server error');
+        console.log('error:', error);
+    }
+});
+
+
+router.post('/provlogin',async(req,res)=>{
+    try{
+        const {email,password} = req.body;
+        const user = await providerModel.findOne({email,password})
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+        res.status(200).json({user})
+    }catch(error){
+        res.status(500).send('Internal server error')
+        console.log('error',error)
+    }
+       
+})
 
 
 module.exports = router
