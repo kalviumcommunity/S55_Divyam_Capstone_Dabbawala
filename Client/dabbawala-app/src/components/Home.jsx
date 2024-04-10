@@ -218,7 +218,7 @@ function Home() {
         </>
       )}
 
-      <div className="translucent">
+      <div className="translucent2">
         
       </div>
       <div className="options">

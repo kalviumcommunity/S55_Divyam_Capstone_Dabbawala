@@ -6,6 +6,12 @@ body {
   box-sizing: border-box;
   font-family: 'Inter';
 }
+:root {
+  --op-color: #ffffff57;
+  
+
+}
+
 
 .nav-cont {
   display: flex;
@@ -613,14 +619,15 @@ nav {
   height: 40vw;
   position: absolute;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.361);
+  background-color: #0000005c;
 }
 
 .op-cont{
   position: absolute;
   width: 40vw;
   height: 20vw;
-  background-color: #ffffff26;
+  background-color: var(--op-color)
+  ;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -645,7 +652,7 @@ nav {
   height: 2.5vw;
   font-size: 1vw;
   cursor: pointer;
-  background-color:#ffffff26 ;
+  background-color:#ffffff4f ;
 }
 
 .op-but:hover{
@@ -656,17 +663,65 @@ nav {
 .dab-cont{
   background-image: url('https://img.hotimg.com/pexels-chan-walrus-958545.jpeg');
   width:100vw;
-  height: 100vh;
+  height: 102.4vh;
   background-size: cover;
   padding: 0;
   margin: 0;
   margin-top: -1.1vw;
+  position: absolute;
+  color: white;
+
 }
 .translucent2{
   position: absolute;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.361);
-  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.616);
+  height: 88.4vh;
+}
+.translucent3{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.616);
+  height: 100%;
+}
+
+.form-cont{
+  width: 60vw;
+  margin-top: 9vw;
+  margin-left: 4vw;
+  position: absolute;
+  z-index: 2;
+}
+
+.reg{
+  height: 3vw;
+  width: 25vw;
+  font-size: 1.3vw;
+  padding-left: 20px;
+}
+
+.reg-form{
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 2vw;
+  column-gap: 1vw;
+  
+}
+#sub{
+  width: 15vw;
+  height: 3vw;
+  border-radius: 20px;
+  background-color: #EC2044;
+  color: white;
+  font-size: 1.3vw;
+}
+#sub:hover{
+  cursor: pointer;
+}
+.slogan{
+  font-size: 4vw;
+  margin-top: -2vw;
 }
 
 @media screen and (max-width: 768px) {
