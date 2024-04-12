@@ -1,18 +1,27 @@
 import React from "react";
 import "../App.css";
- 
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function Cart() {
+function Cart() { // Receive cart as a prop
+
+  const cart = JSON.parse(sessionStorage.getItem('cart'))
+  console.log("cart issss",cart)
   const navigate = useNavigate();
 
-  const logout = ()=>{
-    sessionStorage.removeItem('login')
-    navigate('/')
-  }
+  const logout = () => {
+    sessionStorage.removeItem("login");
+    navigate("/");
+  };
+
+  const subtotal = cart.reduce((total, dabba) => {
+
+    const price = parseFloat(dabba.Price.replace("₹", ""));
+    return total + price;
+  }, 0);
 
   return (
     <>
+
       <nav>
         <div className="cart-nav">
           <img
@@ -24,10 +33,9 @@ function Cart() {
           <Link to="/">
             <img src="https://img.hotimg.com/home-2.png" alt="" id="home" />
           </Link>
-          <Link onClick={logout} to='/'>
-          <img src="https://img.hotimg.com/logout.png" alt="" id="logout" />
+          <Link onClick={logout} to="/">
+            <img src="https://img.hotimg.com/logout.png" alt="" id="logout" />
           </Link>
-        
         </div>
       </nav>
       <div className="grid">
@@ -35,61 +43,55 @@ function Cart() {
           <div id="dabba-img">
             <h3>Cart</h3>
             <div id="line"></div>
-            <div className="dish-cont">
-              <img
-                src="https://img.hotimg.com/salad.png"
-                alt="salad"
-                className="food"
-              />
-            </div>
-
-            <div id="line2"></div>
-
-            <div className="dish-cont">
-              <img
-                src="https://img.hotimg.com/Fish-in-a-box.png"
-                alt="salad"
-                className="food"
-              />
-            </div>
-
+            {cart.map((dabba, index) => (
+              <div key={index}>
+                <div className="dish-cont">
+                  <img src={dabba.Img} alt={dabba.Name} className="food" />
+                </div>
+                <div id="line2"></div>
+              </div>
+            ))}
           </div>
           <div id="product">
             <h3>Product</h3>
             <div id="line"></div>
-            <div className="dish-cont">
-              <p className="dish">Salad Extravaganza</p>
-            </div>
+            {cart.map((dabba, index) => (
+              <>
+                <div key={index} className="dish-cont">
+                <p className="dish">{dabba.Name}</p>
+                
+              </div>
 
-            <div id="line2"></div>
-            <div className="dish-cont">
-              <p className="dish">Fish-in-a-box</p>
-            </div>
+              <div id="line2"></div>
+              </>
+              
+            ))}
           </div>
           <div id="price">
             <h3>Price</h3>
             <div id="line"></div>
-            <div className="dish-cont">
-              <p className="dish">₹250</p>
-            </div>
+            {cart.map((dabba, index) => (
+              <>
+              
+              <div key={index} className="dish-cont">
+                <p className="dish">{dabba.Price}</p>
+              </div>
+              <div id="line2"></div>
 
-            <div id="line2"></div>
-            <div className="dish-cont">
-              <p className="dish">₹250</p>
-            </div>
+              </>
+            ))}
           </div>
           <div id="quantity">
             <h3>Quantity</h3>
             <div id="line"></div>
-            <div className="dish-cont">
-              <input type="number" className="dish" />
-            </div>
-
-            <div id="line2"></div>
-            
-            <div className="dish-cont">
-              <input type="number" className="dish" />
-            </div>
+            {cart.map((dabba, index) => (
+              <>
+              <div key={index} className="dish-cont">
+                <input type="number" className="dish" />
+              </div>
+              <div id="line2"></div>
+              </>
+            ))}
           </div>
         </div>
         <div className="checkout">
@@ -98,7 +100,7 @@ function Cart() {
             <div id="line3"></div>
             <div className="total">
               <p>Subtotal</p>
-              <p>₹500</p>
+              <p>₹{subtotal}</p>
             </div>
             <div id="line3"></div>
             <div className="total">
@@ -108,11 +110,12 @@ function Cart() {
             <div id="line3"></div>
             <div className="total">
               <p>Total</p>
-              <p>₹550</p>
+              <p>₹{subtotal + 50}</p>
             </div>
-            
-              <button id="checkout-btn"><Link to='/checkout/payment'>Checkout</Link></button>
-        
+
+            <button id="checkout-btn">
+              <Link to="/checkout/payment">Checkout</Link>
+            </button>
           </div>
         </div>
       </div>
