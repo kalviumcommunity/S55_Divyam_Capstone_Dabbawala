@@ -2,6 +2,7 @@ import React, { useState, useEffect,useRef } from "react";
 import "../App.css";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import Cart from "./Cart";
 
 
 function Home() {
@@ -13,6 +14,7 @@ function Home() {
   const [dabbaStatus, setDabbaStatus] = useState(false);
   const [itemStatus, setItemStatus] = useState(false);
   const [locationStatus, setLocationStatus] = useState(false);
+  const [cart,setCart] = useState([])
   const categoriesRef = useRef(null)
 
   useEffect(() => {
@@ -79,6 +81,22 @@ function Home() {
   const scrollToCategories = () => {
     categoriesRef.current.scrollIntoView({ behavior: "smooth" });
   };
+
+
+  const handleAddToCart = (selectedDabba) => {
+    
+    setCart(prevCart => {
+      const updatedCart = [...prevCart, selectedDabba];
+      
+
+      sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+      
+      console.log(updatedCart);
+      
+      return updatedCart;
+    });
+  };
+  
   return (
     <>
       <nav>
@@ -187,7 +205,7 @@ function Home() {
                   </div>
                   <br />
                   {loginInfo === "true" ? (
-                    <button>Add to cart</button>
+                    <button onClick={()=>handleAddToCart(dabba)}>Add to cart</button>
                   ) : (
                     <p></p>
                   )}
@@ -270,8 +288,16 @@ function Home() {
         </div>
         
       </footer>
+
+     
     </>
+
   );
+ 
 }
 
 export default Home;
+
+
+
+
