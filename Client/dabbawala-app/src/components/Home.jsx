@@ -83,13 +83,20 @@ function Home() {
   };
 
 
-
   const handleAddToCart = (selectedDabba) => {
-    // Update cart state by adding the selected dabba
-    setCart(prevCart => [...prevCart, selectedDabba]);
-    sessionStorage.setItem('cart',JSON.stringify(cart))
-    console.log(cart)
+    
+    setCart(prevCart => {
+      const updatedCart = [...prevCart, selectedDabba];
+      
+
+      sessionStorage.setItem('cart', JSON.stringify(updatedCart));
+      
+      console.log(updatedCart);
+      
+      return updatedCart;
+    });
   };
+  
   return (
     <>
       <nav>

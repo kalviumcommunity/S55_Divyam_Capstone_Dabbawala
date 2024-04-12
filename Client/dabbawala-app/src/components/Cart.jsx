@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -13,11 +13,16 @@ function Cart() { // Receive cart as a prop
     navigate("/");
   };
 
-  const subtotal = cart.reduce((total, dabba) => {
+  
+  const subtotal = useMemo(()=>{
+    return cart.reduce((total, dabba) => {
 
-    const price = parseFloat(dabba.Price.replace("₹", ""));
-    return total + price;
-  }, 0);
+      const price = parseFloat(dabba.Price.replace("₹", ""));
+      return total + price;
+    }, 0);
+  },[cart])
+  
+  
 
   return (
     <>
