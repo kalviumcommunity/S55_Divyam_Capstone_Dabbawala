@@ -6,7 +6,7 @@ const {getConnectionStatus} = require('./db.js')
 const dabbas = require('./dabba.js')
 const {MealModel,locationModel,itemModel,userModel,providerModel} = require('./schema.js')
 router.use(express.json());
-const joi = require('joi')
+const Joi = require('joi')
 
 const cors = require('cors');
 const Joi = require('joi');
@@ -89,7 +89,7 @@ router.get('/item',async(req,res)=>{
 router.post('/signup', async (req, res) => {
     const { error, value } = newUserSchema.validate(req.body);
     if (error) {
-        res.send(error.details);
+        res.send("Error validating input",error.details);
         console.log(error);
     } else {
         try {
@@ -117,9 +117,9 @@ router.post('/signup', async (req, res) => {
 
     
 router.post('/login',async(req,res)=>{
-    const {error,value} = req.body;
+    const {error,value} = newUserSchema.validate(req.body);
     if(error){
-        res.send(error.details)
+        res.send("Error validating input",error.details)
     }
     else{
         try{
@@ -140,7 +140,7 @@ router.post('/login',async(req,res)=>{
 router.post('/provsign' ,async(req, res) => {
 const{error,value} = newProviderSchema.validate(req.body);
 if(error){
-    res.send(error.details)
+    res.send("Error validating input",error.details)
 }
 else{
     try {
