@@ -12,6 +12,7 @@ router.use(cors())
 
 router.get('/',(req,res)=>{
     res.send('Server deployed')
+    console.log(process.env.URI)
 })
 
 
