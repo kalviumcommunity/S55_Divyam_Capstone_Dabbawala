@@ -87,7 +87,7 @@ router.get('/item',async(req,res)=>{
 router.post('/signup', async (req, res) => {
     const { error, value } = newUserSchema.validate(req.body);
     if (error) {
-        res.send("Error validating input",error.details);
+        res.status(400).json({ error: error.details });
         console.log(error);
     } else {
         try {
@@ -117,7 +117,7 @@ router.post('/signup', async (req, res) => {
 router.post('/login',async(req,res)=>{
     const {error,value} = newUserSchema.validate(req.body);
     if(error){
-        res.send("Error validating input",error.details)
+        res.status(400).json({ error: error.details })
     }
     else{
         try{
@@ -138,7 +138,7 @@ router.post('/login',async(req,res)=>{
 router.post('/provsign' ,async(req, res) => {
 const{error,value} = newProviderSchema.validate(req.body);
 if(error){
-    res.send("Error validating input",error.details)
+    res.status(400).json({ error: error.details })
 }
 else{
     try {
