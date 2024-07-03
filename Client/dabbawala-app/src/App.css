@@ -673,12 +673,13 @@ nav {
   color: white;
 
 }
-.translucent2{
-  position: absolute;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.616);
-  height: 88.4vh;
-}
+  .translucent2{
+    position: absolute;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.616);
+    height: 75.2%;
+    
+    }
 .translucent3{
   position: absolute;
   width: 100%;

@@ -3,6 +3,8 @@ import "../App.css";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Cart from "./Cart";
+import { GoogleLogin } from '@react-oauth/google';
+
 
 
 function Home() {
@@ -141,6 +143,16 @@ function Home() {
                   id="login"
                 />
               </Link>
+              <div>
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log('Google Login Success:', credentialResponse);
+                }}
+                onError={() => {
+                  console.log('Google Login Failed');
+                }}
+              />
+            </div>
             </>
           )}
         </div>
@@ -236,6 +248,7 @@ function Home() {
         </>
       )}
 
+      <div>
       <div className="translucent2">
         
       </div>
@@ -254,6 +267,7 @@ function Home() {
 
         </div>
 
+      </div>
       </div>
 
       <footer>
