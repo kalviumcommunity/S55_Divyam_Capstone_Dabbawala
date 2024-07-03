@@ -6,8 +6,6 @@ const {getConnectionStatus} = require('./db.js')
 const dabbas = require('./dabba.js')
 const {MealModel,locationModel,itemModel,userModel,providerModel} = require('./schema.js')
 router.use(express.json());
-const Joi = require('joi')
-
 const cors = require('cors');
 const Joi = require('joi');
 router.use(cors())
