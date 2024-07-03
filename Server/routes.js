@@ -6,9 +6,27 @@ const {getConnectionStatus} = require('./db.js')
 const dabbas = require('./dabba.js')
 const {MealModel,locationModel,itemModel,userModel,providerModel} = require('./schema.js')
 router.use(express.json());
-
-const cors = require('cors')
+const cors = require('cors');
+const Joi = require('joi');
 router.use(cors())
+
+
+
+
+const newUserSchema = Joi.object({
+    "username": Joi.string().required(),
+    "password":Joi.string().required()
+})
+
+
+const newProviderSchema = Joi.object({
+    "firstname":Joi.string().required(),
+    "lastname":Joi.string().required(),
+    "email":Joi.string().required(),
+    "password": Joi.string().required(),
+    "pin":Joi.number().required(),
+    "phone":Joi.number().required()
+})
 
 router.get('/',(req,res)=>{
     res.send('Server deployed')
@@ -68,43 +86,62 @@ router.get('/item',async(req,res)=>{
 }})
 
 router.post('/signup', async (req, res) => {
-    try {
-        const { username, password } = req.body;
-
-        // Check if the username already exists
-        const existingUser = await userModel.findOne({ username });
-        if (existingUser) {
-            return res.status(400).json({ error: 'Username already exists' });
+    const { error, value } = newUserSchema.validate(req.body);
+    if (error) {
+        res.send("Error validating input",error.details);
+        console.log(error);
+    } else {
+        try {
+            const { username, password } = req.body;
+    
+            // Check if the username already exists
+            const existingUser = await userModel.findOne({ username });
+            if (existingUser) {
+                return res.status(400).json({ error: 'Username already exists' });
+            }
+    
+            // Create a new user if the username doesn't exist
+            const newUser = await userModel.create({
+                username: req.body.username,
+                password: req.body.password
+            });
+    
+            res.status(200).json(newUser);
+        } catch (error) {
+            res.status(500).send('Internal server error');
+            console.log('error:', error);
         }
-
-        // Create a new user if the username doesn't exist
-        const newUser = await userModel.create({
-            username: username,
-            password: password
-        });
-
-        res.status(200).json(newUser);
-    } catch (error) {
-        res.status(500).send('Internal server error');
-        console.log('error:', error);
     }
 });
 
+    
 router.post('/login',async(req,res)=>{
-    try{
-        const {username,password} = req.body;
-        const user = await userModel.findOne({username,password})
-        if (!user) {
-            return res.status(401).json({ error: 'Invalid username or password' });
-        }
-        res.status(200).json({user})
-    }catch(error){
-        res.status(500).send('Internal server error')
-        console.log('error',error)
+    const {error,value} = newUserSchema.validate(req.body);
+    if(error){
+        res.send("Error validating input",error.details)
     }
-       
+    else{
+        try{
+            const {username,password} = req.body;
+            const user = await userModel.findOne({username,password})
+            if (!user) {
+                return res.status(401).json({ error: 'Invalid username or password' });
+            }
+            res.status(200).json({user})
+        }catch(error){
+            res.status(500).send('Internal server error')
+            console.log('error',error)
+        }
+           
+    }
+    
 })
 router.post('/provsign' ,async(req, res) => {
+const{error,value} = newProviderSchema.validate(req.body);
+if(error){
+    res.send("Error validating input",error.details)
+}
+else{
     try {
         const { firstname,lastname,email,password,pin,phone } = req.body;
 
@@ -129,8 +166,10 @@ router.post('/provsign' ,async(req, res) => {
         res.status(500).send('Internal server error');
         console.log('error:', error);
     }
-});
+}
 
+});
+    
 
 router.post('/provlogin',async(req,res)=>{
     try{
