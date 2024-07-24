@@ -13,6 +13,7 @@ router.use(cors())
 
 
 
+
 const newUserSchema = Joi.object({
     "username": Joi.string().required(),
     "password":Joi.string().required()
@@ -27,6 +28,9 @@ const newProviderSchema = Joi.object({
     "pin":Joi.number().required(),
     "phone":Joi.number().required()
 })
+
+
+
 
 router.get('/',(req,res)=>{
     res.send('Server deployed')

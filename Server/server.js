@@ -5,6 +5,7 @@ const router = require('./routes.js');
 const PORT = process.env.PORT || 3000
 const {startDb} = require('./db.js')
 const cors = require('cors')
+const Razorpay = require('razorpay')
 
 app.use(router);
 app.use(cors())
