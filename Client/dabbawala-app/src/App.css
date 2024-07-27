@@ -86,7 +86,11 @@ nav {
 
 
 
-
+.disco{
+  display: flex;
+  flex-direction: row;
+  column-gap: 6vw;
+}
 .lines {
   margin-left: 17vw;
   font-size: 1.8vw;
@@ -103,6 +107,7 @@ nav {
 .usercred {
   height: 5vw;
   margin-top: 1vw;
+  
 }
 
 #cart {
@@ -540,7 +545,7 @@ nav {
 
 .checkout{
   background-color: #2A9D8F;
-  height: 100%;
+  height: 100vh;
   text-align: center;
 }
 
@@ -677,7 +682,7 @@ nav {
   position: absolute;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.616);
-  height: 88.4vh;
+  height: 78.5vh;
 }
 .translucent3{
   position: absolute;
@@ -723,6 +728,34 @@ nav {
 .slogan{
   font-size: 4vw;
   margin-top: -2vw;
+}
+
+.cart-count{
+  text-decoration: none;
+  color: white;
+}
+.empty-cart{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin-top: 2vw;
+  column-gap: 10vw;
+}
+
+.empty-cart-cont{
+  margin-top: 9vw;
+}
+
+#continue{
+  height: 3vw;
+  font-size: 1.2vw;
+  background-color: rgb(255, 61, 61);
+  color: white;
+  
+}
+#continue:hover{
+  box-shadow: 2px 3px 4px #000000;
+  cursor: pointer ;
 }
 
 @media screen and (max-width: 768px) {
