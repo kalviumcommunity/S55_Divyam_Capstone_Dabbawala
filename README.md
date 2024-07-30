@@ -9,4 +9,4 @@
 - Day 3: Create a high-fid figma design
 
 ## Deployed link:
-https://dabbawallaa.netlify.app
+https://dabbawalacompany.netlify.app
