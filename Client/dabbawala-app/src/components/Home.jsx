@@ -2,6 +2,7 @@ import React, { useState, useEffect,useRef } from "react";
 import "../App.css";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import ProfilePopup from "./ProfilePopup"; 
 import Cart from "./Cart";
 
 
@@ -9,8 +10,10 @@ function Home() {
   const [items, setItems] = useState([]);
   const [dabbas, setDabbas] = useState([]);
   const [locations, setLocations] = useState([]);
+  const [popupVisible, setPopupVisible] = useState(false); // State to control popup visibility
   const navigate = useNavigate();
   const loginInfo = sessionStorage.getItem("login");
+  const username = sessionStorage.getItem("username"); // Get username from sessionStorage
   const [dabbaStatus, setDabbaStatus] = useState(false);
   const [itemStatus, setItemStatus] = useState(false);
   const [locationStatus, setLocationStatus] = useState(false);
@@ -70,6 +73,8 @@ function Home() {
 
   const handleLogout = () => {
     sessionStorage.removeItem("login");
+    sessionStorage.removeItem("cart"); 
+    setCart([]);
     navigate("/");
   };
 
@@ -90,6 +95,16 @@ function Home() {
     });
   };
 
+
+  const handleProfileClick = () => {
+    setPopupVisible(true); // Show the popup when profile is clicked
+    console.log('hello')
+  };
+
+  const closePopup = () => {
+    setPopupVisible(false); // Close the popup
+  };
+
   return (
     <>
       <nav>
@@ -102,6 +117,10 @@ function Home() {
 
           {loginInfo === "true" ? (
             <div className="disco">
+              <div className="profile" onClick={handleProfileClick}>
+                {/* Add a profile icon or text here */}
+                
+              </div>  
               <Link to="/cart" className="cart-link">
                 <img
                   src="https://img.hotimg.com/shopping-cart-1.png"
@@ -119,6 +138,7 @@ function Home() {
                   id="logout"
                 />
               </Link>
+              
             </div>
           ) : (
             <div className="disco">
@@ -281,7 +301,7 @@ function Home() {
         </div> */}
         </div>
       </footer>
-
+      {popupVisible && <ProfilePopup username={username} onClose={closePopup} />}
      
     </>
 
