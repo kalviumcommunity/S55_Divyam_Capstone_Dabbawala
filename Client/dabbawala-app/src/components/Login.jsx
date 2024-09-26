@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import {jwtDecode} from 'jwt-decode'; // Corrected import
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -8,15 +10,10 @@ function Login() {
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
+        e.preventDefault();
         try {
-            e.preventDefault();
             if (!username || !password) {
-                if (!username) {
-                    alert('Please enter your username');
-                }
-                if (!password) {
-                    alert('Please enter your password');
-                }
+                alert('Please enter both username and password');
             } else if (password.length < 6) {
                 alert('Password should contain at least 6 characters');
             } else {
@@ -31,8 +28,39 @@ function Login() {
                 }
             }
         } catch (err) {
-            console.error(err);
+            console.error('Error during login:', err);
+            alert('Login failed. Please try again.');
         }
+    };
+
+    const handleGoogleLoginSuccess = async (response) => {
+        try {
+            const decoded = jwtDecode(response.credential); 
+            const data = {
+                googleId: decoded.sub,
+                username: decoded.name,
+                profilePic: decoded.picture,
+            };
+
+            const res = await axios.post(`https://s55-divyam-capstone-dabbawala.onrender.com/googleAuthLogin`, data);
+
+            if (res.status === 200 || res.status === 201) {
+                sessionStorage.setItem('login', true);
+                sessionStorage.setItem('username', decoded.name);
+                alert('Login successful');
+                navigate('/');
+            } else {
+                alert('Google login failed. Please try again.');
+            }
+        } catch (err) {
+            console.error("Google Login Error:", err);
+            alert('Google login failed. Please try again.');
+        }
+    };
+
+    const handleGoogleLoginFailure = (error) => {
+        console.error('Google Login Failed:', error);
+        alert('Google login failed. Please try again.');
     };
 
     return (
@@ -68,9 +96,24 @@ function Login() {
                         </button>
                     </form>
                     <br />
+                    <div className="line-container">
+                        <div className="myLine"></div>
+                        <div className="or">OR</div>
+                        <div className="myLine"></div>
+                    </div>
+                    <div className="custom-google-login-button">
+                        <GoogleLogin
+                            onSuccess={handleGoogleLoginSuccess}
+                            onError={handleGoogleLoginFailure}
+                            className="padding"
+                            text="continue_with"
+                            size="medium"
+                            width="250"
+                        />
+                    </div>
                     <br />
                     <p>
-                        Not a user yet? <Link to="/signup">Sign-up</Link>{' '}
+                        Not a user yet? <Link to="/signup">Sign-up</Link>
                     </p>
                 </div>
             </div>

@@ -18,10 +18,13 @@ const itemSchema = mongoose.Schema({
     img : String
 })
 
-const userSchema = mongoose.Schema({
-    username : String,
-    password : String
-})
+const userSchema =  mongoose.Schema({
+    username: String,
+    password: String,
+    googleId: String, 
+    profilePic: String,
+});
+
 
 const providerSchema = mongoose.Schema({
     firstname : String,

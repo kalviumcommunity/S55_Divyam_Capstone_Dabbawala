@@ -1,0 +1,19 @@
+meta {
+  name: signnn
+  type: http
+  seq: 10
+}
+
+post {
+  url: http://localhost:3000/googleAuthSignup
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username":"hello",
+    "profilePic":"hhhhh",
+    "googleId":"123456789"
+  }
+}

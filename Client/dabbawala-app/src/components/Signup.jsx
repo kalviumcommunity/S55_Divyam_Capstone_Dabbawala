@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios"; // Import axios for making HTTP requests
+import { GoogleLogin } from '@react-oauth/google'; 
+import axios from "axios";
+import { jwtDecode } from "jwt-decode"; 
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -24,13 +26,48 @@ function Signup() {
         );
         if (response.status === 200) {
           navigate("/login");
-          alert('sign-up successfull')
+          alert('Sign-up successful');
         }
-    }
+      }
     } catch (err) {
       console.error(err);
-      alert("username already exists");
+      alert("Username already exists");
     }
+  };
+
+  const handleGoogleSignupSuccess = async (response) => {
+    try {
+
+        const decoded = jwtDecode(response.credential);
+        console.log('Decoded:', decoded);
+        console.log(response)
+        
+        const data = {
+            username: decoded.name,
+            googleId: decoded.sub,
+            profilePic: decoded.picture,
+        };
+
+        const res = await axios.post("https://s55-divyam-capstone-dabbawala.onrender.com/googleAuthSignup", data);
+
+        if (res.status === 200 || res.status === 201) {
+            sessionStorage.setItem("login", true);
+            sessionStorage.setItem("username", data.username); // Corrected to use data.username
+            alert("Sign-up successful");
+            navigate("/");
+        } else {
+            alert("Google sign-up failed. Please try again.");
+        }
+    } catch (err) {
+        console.error("Google Sign-up Error:", err);
+        alert("Google sign-up failed. Please try again.");
+    }
+};
+
+
+  const handleGoogleSignupFailure = (error) => {
+    console.log("Google Sign-up Failed", error);
+    alert("Google sign-up failed. Please try again.");
   };
 
   return (
@@ -79,6 +116,20 @@ function Signup() {
             </button>
           </form>
           <br />
+          <div className="line-container">
+            <div className="myLine"></div>
+            <div className="or">OR</div>
+            <div className="myLine"></div>
+          </div>
+          <div className="custom-google-login-button">
+            <GoogleLogin
+              onSuccess={handleGoogleSignupSuccess}
+              onError={handleGoogleSignupFailure}
+              text="continue_with"
+              size="medium"
+              width="250"
+            />
+          </div>
           <br />
           <p>
             Already a user? <Link to="/login">Login</Link>{" "}
