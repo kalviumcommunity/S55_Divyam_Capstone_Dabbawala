@@ -18,9 +18,29 @@ const newProviderSchema = Joi.object({
     "lastname": Joi.string().required(),
     "email": Joi.string().required(),
     "password": Joi.string().required(),
+
     "pin": Joi.number().required(),
     "phone": Joi.number().required()
 });
+
+    "pin":Joi.number().required(),
+    "phone":Joi.number().required()
+})
+
+
+
+
+router.get('/',(req,res)=>{
+    res.send('Server deployed')
+    console.log(process.env.URI)
+})
+
+
+router.get('/db',async (req,res)=>{
+    const status = await getConnectionStatus()
+    res.send(status)
+})
+
 
 router.get('/', (req, res) => {
     res.send('Server deployed');
