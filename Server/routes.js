@@ -191,4 +191,19 @@ router.post('/provlogin',async(req,res)=>{
 })
 
 
+router.get('/user/:username', async (req, res) => {
+    try {
+      const { username } = req.params;
+      const user = await userModel.findOne({ username });
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+      res.status(201).json(user);
+    } catch (error) {
+      res.status(500).send('Internal server error');
+      console.error('Error:', error);
+    }
+  });
+  
+
 module.exports = router
