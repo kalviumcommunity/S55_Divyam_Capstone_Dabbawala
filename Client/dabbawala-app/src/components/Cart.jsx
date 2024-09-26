@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
+import GooglePayButton from "@google-pay/button-react"
 
 function Cart() { // Receive cart as a prop
 
@@ -118,9 +119,54 @@ function Cart() { // Receive cart as a prop
               <p>₹{subtotal + 50}</p>
             </div>
 
-            <button id="checkout-btn">
-              <Link to="/checkout/payment">Checkout</Link>
-            </button>
+           <GooglePayButton
+           environment="TEST"
+           paymentRequest={{
+            apiVersion:2,
+            apiVersionMinor:0,
+            allowedPaymentMethods:[
+              {
+                type:"CARD",
+                parameters:{
+                  allowedAuthMethods:['PAN_ONLY','CRYPTOGRAM_3DS'],
+                  allowedCardNetworks:['MASTERCARD','VISA']
+                },
+                tokenizationSpecification:{
+                  type:'PAYMENT_GATEWAY',
+                  parameters:{
+                    gateway:'example',
+                    gatewayMerchantId:"exampleGateMerchant"
+                  }
+                }
+              }
+            ],
+            merchantInfo:{
+              merchantId:"123456796533",
+              merchantName:"Demo Merchant"
+            },
+            transactionInfo:{
+              totalPriceStatus:'FINAL',
+              totalPriceLabel:'Total',
+              totalPrice:`${subtotal+50}`,
+              currencyCode:'INR',
+              countryCode:'IN'
+            },
+            shippingAddressRequired:true,
+            callbackIntents:["PAYMENT_AUTHORIZATION"]
+           }}
+           onLoadPaymentData={paymentRequest=>{
+            console.log(paymentRequest)
+           }}
+           onPaymentAuthorized={paymentData=>{
+            console.log(paymentData)
+            return{transactionState:'SUCCESS'}
+           }}
+           existingPaymentMethodRequired='false'
+           buttonColor="Black"
+           buttonType="buy"
+           >
+
+           </GooglePayButton>
           </div>
         </div>
       </div>

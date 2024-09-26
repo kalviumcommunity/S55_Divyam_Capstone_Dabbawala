@@ -106,7 +106,7 @@ function Home() {
             alt="logo"
             id="logo"
           />
-          <input type="text" placeholder="  Search..." id="search" />
+          
           {loginInfo === "true" ? (
             <>
               <Link to="/cart">
