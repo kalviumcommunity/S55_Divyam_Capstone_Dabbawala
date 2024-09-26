@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 require('dotenv').config()
 const router = require('./routes.js');
-const {startDb} = require('./db.js')
 const cors = require('cors')
 const Razorpay = require('razorpay')
 const PORT = process.env.PORT || 3000;
