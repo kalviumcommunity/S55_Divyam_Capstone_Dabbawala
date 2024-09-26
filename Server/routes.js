@@ -34,6 +34,7 @@ const newProviderSchema = Joi.object({
 
 router.get('/',(req,res)=>{
     res.send('Server deployed')
+    console.log(process.env.URI)
 })
 
 
