@@ -9,7 +9,6 @@ const Joi = require('joi');
 router.use(cors());
 const jwt = require('json-web-token');
 
-// Validation schemas
 const newUserSchema = Joi.object({
     "username": Joi.string().required(),
     "password": Joi.string().required()
@@ -45,7 +44,7 @@ router.get('/locations', async (req, res) => handleRequest(res, locationModel));
 router.get('/providers', async (req, res) => handleRequest(res, providerModel));
 router.get('/items', async (req, res) => handleRequest(res, itemModel));
 
-// POST routes for authentication and signup
+
 router.post('/login', async (req, res) => {
     const { error } = newUserSchema.validate(req.body);
     if (error) {
