@@ -52,10 +52,13 @@ router.post('/auth', (req, res) => {
         res.status(200).json({ "AT": accessToken })
     }
     catch (err) {
-        console.log(err)
-        res.status(500).json({ "Message": "Internal Server Error" })
+     
+        console.error('Error generating access token');
+
+        res.status(500).json({ "Message": "Internal Server Error" });
     }
-})
+});
+
 
 
 router.post('/googleAuthLogin', async (req, res) => {
