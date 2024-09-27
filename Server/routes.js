@@ -7,7 +7,7 @@ router.use(express.json());
 const cors = require('cors');
 const Joi = require('joi');
 router.use(cors());
-const jwt = require('jsonwebtoken')
+const jwt = require('json-web-token');
 
 const newUserSchema = Joi.object({
     "username": Joi.string().required(),
@@ -19,33 +19,31 @@ const newProviderSchema = Joi.object({
     "lastname": Joi.string().required(),
     "email": Joi.string().required(),
     "password": Joi.string().required(),
-
     "pin": Joi.number().required(),
     "phone": Joi.number().required()
 });
 
-    "pin":Joi.number().required(),
-    "phone":Joi.number().required()
-})
-
-
-
-
-router.get('/',(req,res)=>{
-    res.send('Server deployed')
-    console.log(process.env.URI)
-})
-
-
-router.get('/db',async (req,res)=>{
-    const status = await getConnectionStatus()
-    res.send(status)
-})
-
+const handleRequest = async (res, model) => {
+    try {
+        const data = await model.find(); // Fetch all documents from the model
+        res.status(200).json(data); // Send the response with the data
+    } catch (error) {
+        console.error(`Error retrieving data from ${model.modelName}:`, error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
 
 router.get('/', (req, res) => {
     res.send('Server deployed');
 });
+
+
+router.get('/users', async (req, res) => handleRequest(res, userModel));
+router.get('/meals', async (req, res) => handleRequest(res, MealModel));
+router.get('/locations', async (req, res) => handleRequest(res, locationModel));
+router.get('/providers', async (req, res) => handleRequest(res, providerModel));
+router.get('/items', async (req, res) => handleRequest(res, itemModel));
+
 
 router.post('/login', async (req, res) => {
     const { error } = newUserSchema.validate(req.body);
@@ -68,18 +66,13 @@ router.post('/login', async (req, res) => {
 
 router.post('/auth', (req, res) => {
     try {
-        const accessToken = jwt.sign(req.body, process.env.ACCESS_TOKEN_SECRET)
-        res.status(200).json({ "AT": accessToken })
-    }
-    catch (err) {
-     
-        console.error('Error generating access token');
-
+        const accessToken = jwt.sign(req.body, process.env.ACCESS_TOKEN_SECRET);
+        res.status(200).json({ "AT": accessToken });
+    } catch (err) {
+        console.error('Error generating access token:', err);
         res.status(500).json({ "Message": "Internal Server Error" });
     }
 });
-
-
 
 router.post('/googleAuthLogin', async (req, res) => {
     try {
@@ -89,15 +82,12 @@ router.post('/googleAuthLogin', async (req, res) => {
         if (!user) {
             return res.status(404).json({ error: 'User does not exist. Please sign up first.' });
         } 
-        
-        // User exists, login
         res.status(200).json(user);
     } catch (err) {
         console.error('Google Login Error:', err);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-
 
 router.post('/googleAuthSignup', async (req, res) => {
     try {
