@@ -7,7 +7,7 @@ router.use(express.json());
 const cors = require('cors');
 const Joi = require('joi');
 router.use(cors());
-const jwt = require('jsonwebtoken')
+const jwt = require('json-web-token')
 
 const newUserSchema = Joi.object({
     "username": Joi.string().required(),
@@ -26,6 +26,57 @@ const newProviderSchema = Joi.object({
 router.get('/', (req, res) => {
     res.send('Server deployed');
 });
+
+
+router.get('/users',async(req,res)=>{
+    try{
+        const users = await userModel.find();
+        res.status(201).json(users);
+    }catch(error){
+        console.error('Error retriving users:',error);
+        res.status(500).json({error:'internal server error'})
+    }
+})
+
+router.get('/meals',async(req,res)=>{
+    try{
+        const users = await MealModel.find();
+        res.status(201).json(users);
+    }catch(error){
+        console.error('Error retriving users:',error);
+        res.status(500).json({error:'internal server error'})
+    }
+})
+
+router.get('/locations',async(req,res)=>{
+    try{
+        const users = await locationModel.find();
+        res.status(201).json(users);
+    }catch(error){
+        console.error('Error retriving users:',error);
+        res.status(500).json({error:'internal server error'})
+    }
+})
+
+router.get('/providers',async(req,res)=>{
+    try{
+        const users = await providerModel.find();
+        res.status(201).json(users);
+    }catch(error){
+        console.error('Error retriving users:',error);
+        res.status(500).json({error:'internal server error'})
+    }
+})
+
+router.get('/items',async(req,res)=>{
+    try{
+        const users = await itemModel.find();
+        res.status(201).json(users);
+    }catch(error){
+        console.error('Error retriving users:',error);
+        res.status(500).json({error:'internal server error'})
+    }
+})
 
 router.post('/login', async (req, res) => {
     const { error } = newUserSchema.validate(req.body);
