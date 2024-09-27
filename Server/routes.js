@@ -9,7 +9,6 @@ const Joi = require('joi');
 router.use(cors());
 const jwt = require('json-web-token');
 
-// Validation schemas
 const newUserSchema = Joi.object({
     "username": Joi.string().required(),
     "password": Joi.string().required()
@@ -45,7 +44,7 @@ router.get('/locations', async (req, res) => handleRequest(res, locationModel));
 router.get('/providers', async (req, res) => handleRequest(res, providerModel));
 router.get('/items', async (req, res) => handleRequest(res, itemModel));
 
-// POST routes for authentication and signup
+
 router.post('/login', async (req, res) => {
     const { error } = newUserSchema.validate(req.body);
     if (error) {
@@ -128,5 +127,39 @@ router.post('/signup', async (req, res) => {
         console.error('Signup error:', error);
     }
 });
+
+
+router.put('/changePassword', async (req, res) => {
+    const passwordSchema = Joi.object({
+        "username": Joi.string().required(),
+        "currentPassword": Joi.string().required(),
+        "newPassword": Joi.string().required()
+    });
+
+    const { error } = passwordSchema.validate(req.body);
+    if (error) {
+        return res.status(400).json({ error: error.details });
+    }
+
+    try {
+        const { username, currentPassword, newPassword } = req.body;
+
+    
+        const user = await userModel.findOne({ username, password: currentPassword });
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid username or current password' });
+        }
+
+        
+        user.password = newPassword;
+        await user.save(); 
+
+        res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error('Error updating password:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 module.exports = router;
