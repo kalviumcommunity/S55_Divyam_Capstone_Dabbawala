@@ -7,6 +7,7 @@ router.use(express.json());
 const cors = require('cors');
 const Joi = require('joi');
 router.use(cors());
+const jwt = require('jsonwebtoken')
 
 const newUserSchema = Joi.object({
     "username": Joi.string().required(),
@@ -44,6 +45,18 @@ router.post('/login', async (req, res) => {
         console.error('Login error:', error);
     }
 });
+
+router.post('/auth', (req, res) => {
+    try {
+        const accessToken = jwt.sign(req.body, process.env.ACCESS_TOKEN_SECRET)
+        res.status(200).json({ "AT": accessToken })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json({ "Message": "Internal Server Error" })
+    }
+})
+
 
 router.post('/googleAuthLogin', async (req, res) => {
     try {
