@@ -8,6 +8,7 @@ const cors = require('cors');
 const Joi = require('joi');
 router.use(cors());
 const jwt = require('json-web-token');
+const rateLimit = require('express-rate-limit');
 
 const newUserSchema = Joi.object({
     "username": Joi.string().required(),
