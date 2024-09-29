@@ -14,6 +14,15 @@ const newUserSchema = Joi.object({
     "password": Joi.string().required()
 });
 
+
+const limiter = rateLimit({
+    windowMs: 5 * 60 * 1000, 
+    max: 20, 
+    message: "Too many requests from this IP, please try again after 15 minutes",
+  });
+  
+  router.use(limiter);
+
 const newProviderSchema = Joi.object({
     "firstname": Joi.string().required(),
     "lastname": Joi.string().required(),
