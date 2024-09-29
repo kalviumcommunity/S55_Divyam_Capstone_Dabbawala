@@ -8,11 +8,21 @@ const cors = require('cors');
 const Joi = require('joi');
 router.use(cors());
 const jwt = require('json-web-token');
+const rateLimit = require('express-rate-limit');
 
 const newUserSchema = Joi.object({
     "username": Joi.string().required(),
     "password": Joi.string().required()
 });
+
+
+const limiter = rateLimit({
+    windowMs: 5 * 60 * 1000, 
+    max: 20, 
+    message: "Too many requests from this IP, please try again after 15 minutes",
+  });
+  
+  router.use(limiter);
 
 const newProviderSchema = Joi.object({
     "firstname": Joi.string().required(),
