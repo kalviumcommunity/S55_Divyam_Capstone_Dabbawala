@@ -1,0 +1,68 @@
+@media only screen and (max-width: 600px) {
+    .grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    #sign-img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+  
+    #sign-page {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .container {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+  
+    #heading {
+      font-size: 24px;
+      text-align: center;
+    }
+  
+    .input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  
+    #btn {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .line-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin: 20px 0;
+    }
+  
+    .myLine {
+      width: 40%;
+      height: 1px;
+      background-color: #ddd;
+    }
+  
+    .or {
+      margin: 0 10px;
+    }
+  
+    .custom-google-login-button {
+      display: flex;
+      justify-content: center;
+    }
+  
+    p {
+      text-align: center;
+    }
+  }
+  
