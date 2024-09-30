@@ -686,7 +686,7 @@ nav {
   color: white;
 
 }
-.translucent2 { 
+.translucent2{
   position: absolute;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.616);
@@ -807,54 +807,4 @@ nav {
   .meal {
     width: calc(50% - 10px);
   }
-}
-
-/* Media query for screens under 600px */
-@media (max-width: 600px) {
-  /* Adjust the logo size */
-  #logo {
-    width: 100px;
-  }
-
-  /* Adjust home and logout icons */
-  #home, #logout {
-    width: 40px;
-  }
-
-  /* Stack the sections vertically */
-  .grid {
-    flex-direction: column;
-    padding: 10px;
-  }
-
-  /* Stack the items in one column */
-  .sections {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  /* Reduce padding for dish containers */
-  .dish-cont {
-    padding: 5px;
-  }
-
-  /* Full width for checkout section */
-  .checkout {
-    width: 100%;
-    margin-top: 20px;
-  }
-
-  /* Adjust fonts for small screens */
-  h1, h2, h3 {
-    font-size: 1.2rem;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-
-  button {
-    font-size: 1rem;
-  }
-}
 }
