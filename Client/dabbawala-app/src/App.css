@@ -690,8 +690,12 @@ nav {
   position: absolute;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.616);
+
   height: 78.5vh;
-}
+
+  height: 10%;
+
+
 .translucent3{
   position: absolute;
   width: 100%;
@@ -803,4 +807,5 @@ nav {
   .meal {
     width: calc(50% - 10px);
   }
+}
 }
