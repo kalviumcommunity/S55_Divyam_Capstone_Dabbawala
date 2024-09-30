@@ -21,7 +21,7 @@ const getConnectionStatus = async () => {
     return JSON.stringify(connectionStatus);
 };
 
-cron.schedule('* * * * *', async () => {
+cron.schedule('0 * * * *', async () => {
     const status = await getConnectionStatus();
     console.log('Running cron job at:', new Date());
     console.log('Connection status:', status);
