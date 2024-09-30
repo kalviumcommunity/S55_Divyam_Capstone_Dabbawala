@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode'; // Corrected import
+import './Login.css'
 
 function Login() {
     const [username, setUsername] = useState('');

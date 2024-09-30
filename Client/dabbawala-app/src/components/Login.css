@@ -1,0 +1,35 @@
+@media screen and (max-width: 400px) {
+    .grid {
+        flex-direction: column;
+    }
+
+    #sign-img {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    #sign-page {
+        width: 100%;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .input {
+        padding: 8px;
+    }
+
+    #btn {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .custom-google-login-button {
+        width: 100%;
+    }
+
+    .or {
+        margin: 0 5px;
+    }
+}
