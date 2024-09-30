@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { GoogleLogin } from '@react-oauth/google'; 
 import axios from "axios";
 import { jwtDecode } from "jwt-decode"; 
+import './Signup.css';
 
 function Signup() {
   const [username, setUsername] = useState("");
