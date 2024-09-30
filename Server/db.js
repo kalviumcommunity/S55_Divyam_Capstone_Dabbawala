@@ -1,8 +1,10 @@
+const express = require('express');
 const mongoose = require('mongoose');
+const cron = require('node-cron'); 
 require('dotenv').config();
+const fs = require('fs'); 
 
 let connectionStatus = 'connecting to db...';
-const URI = process.env.URI
 
 const startDb = async () => {
     try {
@@ -18,5 +20,15 @@ const startDb = async () => {
 const getConnectionStatus = async () => {
     return JSON.stringify(connectionStatus);
 };
+
+cron.schedule('0 * * * *', async () => {
+    const status = await getConnectionStatus();
+    console.log('Running cron job at:', new Date());
+    console.log('Connection status:', status);
+
+    fs.appendFileSync('cron-log.txt', `Cron job executed at: ${new Date()}\nConnection status: ${status}\n\n`);
+});
+
+startDb();
 
 module.exports = { startDb, getConnectionStatus };
